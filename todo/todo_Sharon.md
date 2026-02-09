@@ -1,0 +1,16 @@
+# TOD0 Sharon
+    - [] fonction                          // Sharon
+        - [] login
+            - [] insertUser(id_role)
+            - [] getUser(id_user)
+    - [] BackOffice (admin)                
+        - [] fonction  
+            - [] login
+                - [] userExist()
+                - [] insertAdmin()
+            - [] gestion categ
+                - [] insertCategorie()
+        - [] pages
+            - [] login
+                - [] login par defaut
+                - [] gestion categorie
