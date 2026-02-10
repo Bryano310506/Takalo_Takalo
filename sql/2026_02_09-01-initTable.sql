@@ -5,6 +5,7 @@ USE takalo_takalo;
 -- Table role
 CREATE TABLE role (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(50) NOT NULL,
     libelle VARCHAR(255) NOT NULL
 );
 
