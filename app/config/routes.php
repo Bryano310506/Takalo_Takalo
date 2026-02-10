@@ -17,18 +17,18 @@ $router->group('', function(Router $router) use ($app) {
 		$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
 	});
 
-	$router->get('/hello-world/@name', function($name) {
-		echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
-	});
+	// $router->get('/hello-world/@name', function($name) {
+	// 	echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
+	// });
 
-	$router->get('/route-iray', function() {
-		echo '<h1>route-iray ve</h1>';
-	});
+	// $router->get('/route-iray', function() {
+	// 	echo '<h1>route-iray ve</h1>';
+	// });
 
-	$router->group('/api', function() use ($router) {
-		$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
-		$router->get('/users/@id:[0-9]', [ ApiExampleController::class, 'getUser' ]);
-		$router->post('/users/@id:[0-9]', [ ApiExampleController::class, 'updateUser' ]);
-	});
+	// $router->group('/api', function() use ($router) {
+	// 	$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
+	// 	$router->get('/users/@id:[0-9]', [ ApiExampleController::class, 'getUser' ]);
+	// 	$router->post('/users/@id:[0-9]', [ ApiExampleController::class, 'updateUser' ]);
+	// });
 	
 }, [ SecurityHeadersMiddleware::class ]);
