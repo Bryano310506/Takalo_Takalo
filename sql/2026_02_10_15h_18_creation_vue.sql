@@ -99,3 +99,19 @@ SELECT
     s.libelle AS status_libelle
 FROM historique_echange he 
 JOIN status s ON he.id_status = s.id;
+
+CREATE VIEW v_historique_echange_status AS 
+SELECT 
+    he.id AS id_echange,
+    he.id_emetteur,
+    he.id_recepteur,
+    he.id_objet_propose,
+    he.id_objet_demande,
+    he.id_status,
+    he.date_debut,
+    he.date_fin,
+    s.id AS status_id,
+    s.code AS status_code,
+    s.libelle AS status_libelle
+FROM historique_echange he 
+JOIN status s ON he.id_status = s.id;
