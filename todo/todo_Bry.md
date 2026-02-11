@@ -1,11 +1,11 @@
 # TODO BRY
-    - [] fonction
-        - [] insertUtilisateur()
-        - [] transactionnels
-            - [] insertObjets()
-            - [] insertImg
-        - [] getObjetsByUser()
-        - [] insertEchange()
+    - [ok] fonction
+        - [ok] insertUtilisateur()
+        - [ok] transactionnels
+            - [ok] insertObjets()
+            - [ok] insertImg
+        - [ok] getObjetsByUser()
+        - [ok] insertEchange()
     - [] pages
         - [] inscription
         - [] login
