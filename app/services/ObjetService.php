@@ -1,6 +1,6 @@
 <?php
 
-namespace app\service;
+namespace app\services;
 
 use app\model\ObjetModel;
 use app\model\PhotoModel;

@@ -13,7 +13,7 @@ class UserService {
 	public function register(array $values, $plainPassword) {
 		$hash = password_hash((string)$plainPassword, PASSWORD_DEFAULT);
 
-		return $this->model->createUser($values['nom'], $hash, $values['id_role']);
+		return $this->model->createUser($values['nom'], $values['prenom'], $values['email'], $hash, $values['telephone'], $values['id_role']);
 	}
 
 }
