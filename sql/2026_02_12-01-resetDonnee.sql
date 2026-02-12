@@ -12,6 +12,24 @@ DELETE FROM categorie;
 
 -- Réinsertion des données
 
+-- Insertion des rôles
+INSERT INTO role (code, libelle) VALUES
+('ADMIN', 'Administrateur'),
+('USER', 'Utilisateur');
+
+-- Insertion des utilisateurs
+INSERT INTO user (nom, prenom, email, telephone, mdp, id_role) VALUES
+('Admin', 'Admin', 'admin@example.com', '0000000000', 'password123', 1),
+('User1', 'User1', 'user1@example.com', '1111111111', 'password123', 2),
+('User2', 'User2', 'user2@example.com', '2222222222', 'password123', 2),
+('User3', 'User3', 'user3@example.com', '3333333333', 'password123', 2);
+
+-- Insertion des statuts
+INSERT INTO status (libelle) VALUES
+('Disponible'),
+('Echange'),
+('En attente');
+
 -- Insertion des catégories
 INSERT INTO categorie (libelle) VALUES
 ('Electronique'),
@@ -45,22 +63,22 @@ INSERT INTO photos (id_objet, nom) VALUES
 (10, 'product-12.webp');
 
 -- Insertion des propriétaires d'objets (assignation à des utilisateurs existants)
-INSERT INTO proprietaire_objet (id_user, id_objet, date_debut) VALUES
-(2, 1, '2026-02-13'),
-(2, 2, '2026-02-13'),
-(3, 3, '2026-02-13'),
-(1, 4, '2026-02-13'),
-(2, 5, '2026-02-13'),
-(3, 6, '2026-02-13'),
-(1, 7, '2026-02-13'),
-(2, 8, '2026-02-13'),
-(3, 9, '2026-02-13'),
-(1, 10, '2026-02-13');
+INSERT INTO proprietaire_objet (id_user, id_objet, date_echange, date_debut, date_fin) VALUES
+(2, 1, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(2, 2, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(2, 3, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(2, 4, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(3, 5, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(3, 6, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(3, 7, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(4, 8, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(4, 9, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(4, 10, '2026-02-13 08:00:00', '2026-02-13', NULL);
 
 -- Insertion des historiques d'échange (exemples d'échanges)
-INSERT INTO historique_echange (id_objet1, id_objet2, id_status, date_debut, date_fin) VALUES
-(1, 2, 2, '2026-02-13', '2026-02-14'),
-(3, 4, 2, '2026-02-13', NULL),
-(5, 6, 3, '2026-02-13', NULL),
-(7, 8, 2, '2026-02-13', '2026-02-15'),
-(9, 10, 1, '2026-02-13', NULL);
+INSERT INTO historique_echange (id_objet1, id_objet2, id_status, date_echange, date_debut, date_fin) VALUES
+(1, 2, 2, '2026-02-13 08:00:00', '2026-02-14', NULL),
+(3, 4, 2, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(5, 6, 3, '2026-02-13 08:00:00', '2026-02-13', NULL),
+(7, 8, 2, '2026-02-13 08:00:00', '2026-02-15', NULL),
+(9, 10, 1, '2026-02-13 08:00:00', '2026-02-13', NULL);
