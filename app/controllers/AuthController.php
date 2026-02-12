@@ -22,10 +22,9 @@ class AuthController {
 		$pdo = Flight::db();
 		$model = new UserModel($pdo);
 
-		$hash = password_hash($password, PASSWORD_BCRYPT);
-		$user = $model->getUserByEmailAndMdp($email,$hash);
+		$user = $model->getUserByEmail($email);
 
-		if ($user) {
+		if ($user && password_verify($password, $user['mdp'])) {
 			return true;
 		}
 		return false;
@@ -35,8 +34,12 @@ class AuthController {
 		$pdo = Flight::db();
 		$model = new UserModel($pdo);
 
-		$hash = password_hash($password, PASSWORD_BCRYPT);
-		return $model->getUserByEmailAndMdp($email,$hash);
+		$user = $model->getUserByEmail($email);
+
+		if ($user && password_verify($password, $user['mdp'])) {
+			return $user;
+		}
+		return null;
 	}
 
     public function validateRegisterAjax() {
@@ -51,6 +54,7 @@ class AuthController {
 				'password' => $req->data->password,
 				'confirm_password' => $req->data->confirm_password,
 				'telephone' => $req->data->telephone,
+				'id_role' => $req->data->id_role,
 			];
 
 			// Essayer de créer le repo pour vérifier si l'email existe déjà
@@ -88,24 +92,25 @@ class AuthController {
 		$req = Flight::request();
 
 		$input = [
-		'nom' => $req->data->nom,
-		'prenom' => $req->data->prenom,
-		'email' => $req->data->email,
-		'password' => $req->data->password,
-		'confirm_password' => $req->data->confirm_password,
-		'telephone' => $req->data->telephone,
+			'nom' => $req->data->nom,
+			'prenom' => $req->data->prenom,
+			'email' => $req->data->email,
+			'password' => $req->data->password,
+			'confirm_password' => $req->data->confirm_password,
+			'telephone' => $req->data->telephone,
+			'id_role' => $req->data->id_role,
 		];
 
 		$res = Validator::validateRegister($input);
 
 		if ($res['ok']) {
-		$svc->register($res['values'], (string)$input['password']);
-		Flight::render('auth/register', [
-			'values' => ['nom'=>'','prenom'=>'','email'=>'','telephone'=>''],
-			'errors' => ['nom'=>'','prenom'=>'','email'=>'','password'=>'','confirm_password'=>'','telephone'=>''],
-			'success' => true
-		]);
-		return;
+			$svc->register($res['values'], (string)$input['password']);
+			Flight::render('auth/register', [
+				'values' => ['nom'=>'','prenom'=>'','email'=>'','telephone'=>''],
+				'errors' => ['nom'=>'','prenom'=>'','email'=>'','password'=>'','confirm_password'=>'','telephone'=>''],
+				'success' => true
+			]);
+			return;
 		}
 
 		Flight::render('auth/register', [
