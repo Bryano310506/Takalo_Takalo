@@ -20,6 +20,7 @@ class Validator {
       'prenom' => trim((string)($input['prenom'] ?? '')),
       'email' => trim((string)($input['email'] ?? '')),
       'telephone' => self::normalizeTelephone($input['telephone'] ?? ''),
+      'id_role' => trim((string)($input['id_role'] ?? '')),
     ];
 
     $password = (string)($input['password'] ?? '');
