@@ -16,7 +16,7 @@ class ObjetModel {
     }
 
     public function getObjetById($id) {
-        $stmt = $this->db->prepare("SELECT * FROM objets WHERE id = :id");
+        $stmt = $this->db->prepare("SELECT * FROM objets WHERE id_objet = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -43,7 +43,7 @@ class ObjetModel {
     }
 
     public function deleteObjet($id) {
-        $stmt = $this->db->prepare("DELETE FROM objets WHERE id = :id");
+        $stmt = $this->db->prepare("DELETE FROM objets WHERE id_objet = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }

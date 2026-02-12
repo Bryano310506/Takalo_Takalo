@@ -23,7 +23,7 @@ class ObjetService {
         foreach ($proprietaireObjetModel as $proprietaireObjet) {
             $objet = $this->objetModel->getObjetById($proprietaireObjet['id_objet']);
             if ($objet) {
-                $photos = $this->photoModel->getPhotosByObjetId($objet['id']);
+                $photos = $this->photoModel->getPhotosByObjetId($objet['id_objet']);
                 $objet['photos'] = $photos;
                 $objets[] = $objet; 
             }
