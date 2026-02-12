@@ -36,6 +36,7 @@
                   <label for="nom" class="form-label fw-semibold">
                     <i class="bi bi-person me-1"></i>Nom
                   </label>
+                  <input type="hidden" name="id_role" value="2">
                   <input 
                     id="nom" 
                     name="nom" 
