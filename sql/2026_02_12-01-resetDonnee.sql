@@ -16,27 +16,20 @@ DELETE FROM categorie;
 INSERT INTO categorie (libelle) VALUES
 ('Electronique'),
 ('Meubles'),
-('Vêtements'),
-('Livres'),
-('Jouets'),
-('Sports'),
-('Cuisine'),
-('Jardinage'),
-('Automobiles'),
-('Bijoux');
+('Vêtements');
 
 -- Insertion des objets (un par image dans img)
 INSERT INTO objets (titre, description, id_categorie, prix) VALUES
 ('Produit 1 Variant', 'Description du produit 1 variant', 1, 100.00),
-('Produit 2', 'Description du produit 2', 2, 150.00),
-('Produit 3', 'Description du produit 3', 3, 200.00),
-('Produit 4', 'Description du produit 4', 4, 50.00),
-('Produit 5', 'Description du produit 5', 5, 75.00),
-('Produit 7', 'Description du produit 7', 6, 120.00),
-('Produit 8', 'Description du produit 8', 7, 90.00),
-('Produit 10', 'Description du produit 10', 8, 180.00),
-('Produit 11', 'Description du produit 11', 9, 250.00),
-('Produit 12', 'Description du produit 12', 10, 300.00);
+('Produit 2', 'Description du produit 2', 1, 150.00),
+('Produit 3', 'Description du produit 3', 1, 200.00),
+('Produit 4', 'Description du produit 4', 1, 50.00),
+('Produit 5', 'Description du produit 5', 2, 75.00),
+('Produit 7', 'Description du produit 7', 2, 120.00),
+('Produit 8', 'Description du produit 8', 2, 90.00),
+('Produit 10', 'Description du produit 10', 3, 180.00),
+('Produit 11', 'Description du produit 11', 3, 250.00),
+('Produit 12', 'Description du produit 12', 3, 300.00);
 
 -- Insertion des photos (utilisant les noms des fichiers dans img)
 INSERT INTO photos (id_objet, nom) VALUES
