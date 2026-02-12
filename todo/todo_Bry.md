@@ -7,8 +7,8 @@
         - [ok] getObjetsByUser()
         - [ok] insertEchange()
     - [] pages
-        - [] inscription
-        - [] login
+        - [ok] inscription
+        - [ok] login
         - [] profile
             - [] listObjet
             - [] formulaire insertion
