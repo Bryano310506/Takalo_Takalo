@@ -33,7 +33,7 @@ class ObjetModel {
     }
 
     public function updateObjet($id, $titre, $description, $id_categorie, $prix) {
-        $stmt = $this->db->prepare("UPDATE objets SET titre = :titre, description = :description, id_categorie = :id_categorie, prix = :prix WHERE id = :id");
+        $stmt = $this->db->prepare("UPDATE objets SET titre = :titre, description = :description, id_categorie = :id_categorie, prix = :prix WHERE id_objet = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':titre', $titre);
         $stmt->bindParam(':description', $description);
@@ -45,7 +45,13 @@ class ObjetModel {
     public function deleteObjet($id) {
         $stmt = $this->db->prepare("DELETE FROM objets WHERE id_objet = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        return $stmt->execute();
+        $stmt1 = $this->db->prepare("DELETE FROM proprietaire_objet WHERE id_objet = :id"); 
+        $stmt1->bindParam(':id', $id, PDO::PARAM_INT); 
+        $stmt1->execute(); 
+        $stmt2 = $this->db->prepare("DELETE FROM photos WHERE id_objet = :id"); 
+        $stmt2->bindParam(':id', $id, PDO::PARAM_INT); 
+        $stmt2->execute();
+        return true;
     }
 
 }

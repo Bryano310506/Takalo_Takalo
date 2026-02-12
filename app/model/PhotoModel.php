@@ -25,7 +25,7 @@ class PhotoModel {
     }
 
     public function deletePhoto($id) {
-        $stmt = $this->db->prepare("DELETE FROM photos WHERE id = :id");
+        $stmt = $this->db->prepare("DELETE FROM photos WHERE id_objet = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
