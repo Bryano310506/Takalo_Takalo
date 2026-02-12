@@ -9,6 +9,6 @@
     - [] pages
         - [ok] inscription
         - [ok] login
-        - [] profile
-            - [] listObjet
-            - [] formulaire insertion
+        - [ok] profile
+            - [ok] listObjet
+            - [ok] formulaire insertion
