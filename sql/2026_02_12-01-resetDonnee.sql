@@ -20,7 +20,7 @@ INSERT INTO categorie (libelle) VALUES
 
 -- Insertion des objets (un par image dans img)
 INSERT INTO objets (titre, description, id_categorie, prix) VALUES
-('Produit 1 Variant', 'Description du produit 1 variant', 1, 100.00),
+('Produit 1', 'Description du produit 1', 1, 100.00),
 ('Produit 2', 'Description du produit 2', 1, 150.00),
 ('Produit 3', 'Description du produit 3', 1, 200.00),
 ('Produit 4', 'Description du produit 4', 1, 50.00),
