@@ -1,6 +1,7 @@
 <?php
 
 use app\controllers\AuthController;
+use app\controllers\ProfileController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -42,7 +43,7 @@ $router->group('', function(Router $router) use ($app) {
 				// Simuler la connexion de l'utilisateur
 				$_SESSION['user_connected'] = $user;
 
-				// $app->redirect('/message');
+				$app->redirect('/profile');
 			} else {
 				$app->render('auth/login', [
 					'error' => 'Email ou mot de passe incorrect.'
@@ -50,6 +51,24 @@ $router->group('', function(Router $router) use ($app) {
 			}
 		});
 	});
+
+	$router->group('/profile', function() use ($router, $app) {
+		$router->get('', function() use ($app) {
+			$profile = new ProfileController();
+			$user_connected = $_SESSION['user_connected'];
+			$list_objets = $profile->getAllObjetsByuser($user_connected['id_user']);
+			if($user_connected) {
+				$profile->rendreProfile($app, $user_connected, $list_objets);
+			} 
+		});
+	});
+
+	// Logout
+	$router->get('/logout', function() use ($app) {
+		session_destroy();
+
+		$app->render('auth/register', ['errors' => '']);
+	});	
 
 	// $router->get('/hello-world/@name', function($name) {
 	// 	echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
