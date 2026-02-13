@@ -1,14 +1,14 @@
 # TODO BRY
-    - [] fonction
-        - [] insertUtilisateur()
-        - [] transactionnels
-            - [] insertObjets()
-            - [] insertImg
-        - [] getObjetsByUser()
-        - [] insertEchange()
+    - [ok] fonction
+        - [ok] insertUtilisateur()
+        - [ok] transactionnels
+            - [ok] insertObjets()
+            - [ok] insertImg
+        - [ok] getObjetsByUser()
+        - [ok] insertEchange()
     - [] pages
-        - [] inscription
-        - [] login
-        - [] profile
-            - [] listObjet
-            - [] formulaire insertion
+        - [ok] inscription
+        - [ok] login
+        - [ok] profile
+            - [ok] listObjet
+            - [ok] formulaire insertion
