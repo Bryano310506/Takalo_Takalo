@@ -170,38 +170,38 @@ $router->group('', function(Router $router) use ($app) {
 			$userController->showGestionUsers();
 		});
 		
-		$router->get('/admin/users/ajout', function() use ($app) {
+		$router->get('/users/ajout', function() use ($app) {
 			$userController = new UserController($app);
 			$userController->showAjoutUser();
 		});
 		
-		$router->post('/admin/users/ajout', function() use ($app) {
+		$router->post('/users/ajout', function() use ($app) {
 			$userController = new UserController($app);
 			$userController->insertUser();
 		});
 		
-		$router->get('/admin/users/modifier/@id', function($id) use ($app) {
+		$router->get('/users/modifier/@id', function($id) use ($app) {
 			$userController = new UserController($app);
 			$userController->showModifierUser($id);
 		});
 		
-		$router->post('/admin/users/modifier', function() use ($app) {
+		$router->post('/users/modifier', function() use ($app) {
 			$userController = new UserController($app);
 			$userController->updateUser();
 		});
 		
-		$router->delete('/admin/users/@id', function($id) use ($app) {
+		$router->delete('/users/@id', function($id) use ($app) {
 			$userController = new UserController($app);
 			$userController->deleteUser($id);
 		});
 
 		// Tableau de bord
-		$router->get('/admin/dashboard', function() use ($app) {
+		$router->get('/dashboard', function() use ($app) {
 			$userController = new UserController($app);
 			$userController->showDashboard();
 		});
 
-		$router->delete('/admin/categories/@id', function($id) use ($app) {
+		$router->delete('/categories/@id', function($id) use ($app) {
 			$categorieController = new CategorieController($app);
 			$categorieController->deleteCategorie($id);
 		});
