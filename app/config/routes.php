@@ -1,8 +1,10 @@
 <?php
 
 use app\controllers\AuthController;
+use app\controllers\CategorieController;
 use app\controllers\ObjetController;
 use app\controllers\ProfileController;
+use app\controllers\UserController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -50,6 +52,158 @@ $router->group('', function(Router $router) use ($app) {
 					'error' => 'Email ou mot de passe incorrect.'
 				]);
 			}
+		});
+	});
+
+   // Routes d'authentification
+	$router->group('/login', function() use ($router, $app) {
+		$router->get('', function() use ($app) {
+			$authController = new AuthController($app);
+			$authController->showLogin();
+		});
+		$router->post('', function() use ($app) {
+			$authController = new AuthController($app);
+			$authController->login();
+		});
+	});
+
+	//logout
+	$router->get('/logout', function() use ($app) {
+		$authController = new AuthController($app);
+		$authController->logout();
+	});
+
+	// Routes catégories (public)
+    $router->get('/categories', function() use ($app) {
+        $categorieController = new CategorieController($app);
+        $categorieController->showListeCategories();
+    });
+
+    // Routes objets (public)
+    $router->get('/objets', function() use ($app) {
+        $objetController = new ObjetController($app);
+        $objetController->showListeObjets();
+    });
+    
+    $router->get('/objets/categorie/@id', function($id) use ($app) {
+        $objetController = new ObjetController($app);
+        $objetController->showObjetsByCategorie($id);
+    });
+
+	// Routes admin catégories
+	$router->group('/admin', function() use ($router, $app) {
+		$router->get('/categories', function() use ($app) {
+			$categorieController = new CategorieController($app);
+			$categorieController->showGestionCategories();
+		});
+		
+		$router->get('/categories/ajout', function() use ($app) {
+			$categorieController = new CategorieController($app);
+			$categorieController->showAjoutCategorie();
+		});
+		
+		$router->post('/admin/categories/ajout', function() use ($app) {
+			$categorieController = new CategorieController($app);
+			$categorieController->insertCategorie();
+		});
+		
+		$router->get('/categories/modifier/@id', function($id) use ($app) {
+			$categorieController = new CategorieController($app);
+			$categorieController->showModifierCategorie($id);
+		});
+		
+		$router->post('/categories/modifier', function() use ($app) {
+			$categorieController = new CategorieController($app);
+			$categorieController->updateCategorie();
+		});
+
+		// Routes admin objets
+		$router->get('/objets', function() use ($app) {
+			$objetController = new ObjetController($app);
+			$objetController->showGestionObjets();
+		});
+		
+		$router->get('/objets/ajout', function() use ($app) {
+			$objetController = new ObjetController($app);
+			$objetController->showAjoutObjet();
+		});
+		
+		$router->post('/objets/ajout', function() use ($app) {
+			$req = $app->request();
+
+			$titre = $req->data->titre;
+			$description = $req->data->description;
+			$id_categorie = $req->data->id_categorie;
+			$prix = $req->data->prix;
+			$photos = $_FILES['photos'] ?? null;
+
+			$user_connected = $_SESSION['user_connected'];
+			$objetController = new ObjetController($app);
+			$objetController->insertObjet($titre, $description, $id_categorie, $prix, $photos, $user_connected['id_user']);
+		});
+		
+		$router->get('/objets/modifier/@id', function($id) use ($app) {
+			$objetController = new ObjetController($app);
+			$objetController->showModifierObjet($id);
+		});
+		
+		$router->post('/objets/modifier/@id', function($id) use ($app) {
+			$req = $app->request(); 
+			$titre = $req->data->titre; 
+			$description = $req->data->description;
+			$id_categorie = $req->data->id_categorie; 
+			$prix = $req->data->prix; 
+			$files = $_FILES['photos'] ?? null;
+			
+			$objetController = new ObjetController($app);
+			$objetController->updateObjet($id, $titre, $description, $id_categorie, $prix, $files);
+		});
+		
+		$router->delete('/objets/@id', function($id) use ($app) {
+			$objetController = new ObjetController($app);
+			$objetController->deleteObjet($id);
+		});
+
+		// Routes admin utilisateurs
+		$router->get('/users', function() use ($app) {
+			$userController = new UserController($app);
+			$userController->showGestionUsers();
+		});
+		
+		$router->get('/admin/users/ajout', function() use ($app) {
+			$userController = new UserController($app);
+			$userController->showAjoutUser();
+		});
+		
+		$router->post('/admin/users/ajout', function() use ($app) {
+			$userController = new UserController($app);
+			$userController->insertUser();
+		});
+		
+		$router->get('/admin/users/modifier/@id', function($id) use ($app) {
+			$userController = new UserController($app);
+			$userController->showModifierUser($id);
+		});
+		
+		$router->post('/admin/users/modifier', function() use ($app) {
+			$userController = new UserController($app);
+			$userController->updateUser();
+		});
+		
+		$router->delete('/admin/users/@id', function($id) use ($app) {
+			$userController = new UserController($app);
+			$userController->deleteUser($id);
+		});
+
+		// Tableau de bord
+		$router->get('/admin/dashboard', function() use ($app) {
+			$userController = new UserController($app);
+			$userController->showDashboard();
+		});
+
+		$router->delete('/admin/categories/@id', function($id) use ($app) {
+			$categorieController = new CategorieController($app);
+			$categorieController->deleteCategorie($id);
 		});
 	});
 
@@ -122,25 +276,5 @@ $router->group('', function(Router $router) use ($app) {
 		});
 	});
 
-	// Logout
-	$router->get('/logout', function() use ($app) {
-		session_destroy();
-
-		$app->render('auth/register', ['errors' => '']);
-	});	
-
-	// $router->get('/hello-world/@name', function($name) {
-	// 	echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
-	// });
-
-	// $router->get('/route-iray', function() {
-	// 	echo '<h1>route-iray ve</h1>';
-	// });
-
-	// $router->group('/api', function() use ($router) {
-	// 	$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
-	// 	$router->get('/users/@id:[0-9]', [ ApiExampleController::class, 'getUser' ]);
-	// 	$router->post('/users/@id:[0-9]', [ ApiExampleController::class, 'updateUser' ]);
-	// });
 	
 }, [ SecurityHeadersMiddleware::class ]);
