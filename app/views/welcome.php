@@ -1,7 +1,6 @@
 <?php
-use app\models\ObjetModel;
-$model = new ObjetModel(Flight::db());
-var_dump($model->getAllObjet());
+$_SESSION["user"] = array();
+$_SESSION["user"]["id"] = 1;
 ?>
 <h1>Welcome to the FlightPHP Skeleton Example!</h1>
 <?php if(!empty($message)) { ?>

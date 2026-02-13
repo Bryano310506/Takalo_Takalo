@@ -8,14 +8,20 @@
 ### [] Models :
 - [ok] objectModel
     - [ok] getAllObjet()
-- [] echangeModel
-    - [] getAllEchangeAttente(id_user)
-    - [] getAllEchange(id_user, id_status)
-    - [] acceptEchange(id_historique_echange)
-    - [] refuserEchange(id_historique_echange)
+- [ok] echangeModel
+    - [ok] getAllEchangeAttente(id_user)
+    - [ok] getAllEchange(id_user, id_status)
+    - [ok] envoyerDemandeEchange()
+    - [ok] acceptEchange(id_historique_echange)
+    - [ok] refuserEchange(id_historique_echange)
+- [ok] objetModel
+    - getAllObjet
+- HistoriqueEchamgeModele
 ### [] Vue :
-    - [] listObjet
-    - [] gestionPropostion 
+    - [ok] listObjet
+    - [ok] gestionPropostion
+        - listePropositionEnAttente
+        - boutonacceter et reffuser
 ### [] controleur
     - echangeControleur
         - showEchangeAttente(id_user)

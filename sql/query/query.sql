@@ -1,1 +1,0 @@
-SELECT * FROM historique_echange 
