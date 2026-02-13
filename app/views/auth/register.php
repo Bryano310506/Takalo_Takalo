@@ -148,6 +148,10 @@
               Déjà un compte ? 
               <a href="/auth/login" class="text-primary text-decoration-none fw-semibold">Se connecter</a>
             </p>
+            <p class="mb-0 text-muted">
+              Vous etes un administrateur ?
+              <a href="/login" class="text-primary text-decoration-none fw-semibold">Se connecter</a>
+            </p>
           </div>
         </div>
       </div>
