@@ -41,3 +41,6 @@ INSERT INTO proprietaire_objet (id_user, id_objet, date_echange) VALUES
 (2, 2, '2026-02-11 15:30:00'),
 (3, 3, '2026-02-12 20:45:00');
 
+
+INSERT INTO user (nom, mdp, id_role) VALUES
+('Admin', '123', 1);
