@@ -188,3 +188,8 @@ JOIN categorie cat_demande ON obj_demande.id_categorie = cat_demande.id
 JOIN status s ON he.id_status = s.id;
 
 SELECT * FROM v_echange_details WHERE 
+
+SELECT * FROM objets;
+
+;
+SELECT * FROM objets o WHERE o.titre  LIKE ? AND o.id_categorie LIKE ?;

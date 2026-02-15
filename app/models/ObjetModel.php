@@ -160,7 +160,28 @@ class ObjetModel
     }
 
     public function getObjetFiltred($mot_cle) {
-        $sql = "SELECT * FROM objets WHERE title LIKE %?% AND cat"
+    
+        try {
+            $sql = "SELECT * FROM objets o WHERE o.titre  LIKE ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute(["%" . $mot_cle . "%"]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Erreur lors de la vérification de l'objet: " . $e->getMessage());
+            return false;
+        }
+
+    }
+    public function getObjetFiltredWhithCat($mot_cle,$id_categorie) {
+        try {
+            $sql = "SELECT * FROM objets o WHERE o.titre  LIKE ? AND o.id_categorie LIKE ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute(["%" . $mot_cle . "%",$id_categorie]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Erreur lors de la vérification de l'objet: " . $e->getMessage());
+            return false;
+        }
     }
 }
 ?>

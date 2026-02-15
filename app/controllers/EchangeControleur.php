@@ -19,10 +19,11 @@ class EchangeControleur
     public function __construct($app)
     {
         $this->app = $app;
-        $this->historiqueEchangeModel = new HistoriqueEchangeModel(Flight::db());
-        $this->proprietaireModel = new ProprietaireObjetModel(Flight::db());
-        $this->objetModel = new ObjetModel(Flight::db());
-        $this->statusModel = new StatusModel(Flight::db());
+        $db = Flight::db();
+        $this->historiqueEchangeModel = new HistoriqueEchangeModel($db);
+        $this->proprietaireModel = new ProprietaireObjetModel($db);
+        $this->objetModel = new ObjetModel($db);
+        $this->statusModel = new StatusModel($db);
     }
 
     /**
